@@ -29,7 +29,7 @@ const MainTab = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'NewFeed') {
+          if (route.name === 'NewFeedTab') {
             iconName = focused
               ? 'ios-information-circle'
               : 'ios-information-circle-outline';
@@ -46,7 +46,7 @@ const MainTab = () => {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen name="NewFeed" component={NewFeedStack} options={{ headerShown: false }} />
+      <Tab.Screen name="NewFeedTab" component={NewFeedStack} options={{ headerShown: false }} />
       <Tab.Screen name="Detail" component={DetailsScreen} />
       <Tab.Screen name="Settings" component={SettingScreen} />
     </Tab.Navigator>

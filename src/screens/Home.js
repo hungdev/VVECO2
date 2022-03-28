@@ -7,7 +7,7 @@ export default function Home({ navigation }) {
       <Text>NewFeed Screen</Text>
       <Button
         title="Go to Comment"
-        onPress={() => navigation.navigate('Comment')}
+        onPress={() => navigation.navigate('Comment', { data: 'hello' })}
       />
     </View>
   )
