@@ -16,6 +16,14 @@ export const productSlice = createSlice({
       //   products: [...state.products, action.payload]
       // })
     },
+    removeProduct: (state, action) => {
+      console.log('action', action)
+      // state.products.push(action.payload)
+      // return ({
+      //   ...state,
+      //   products: [...state.products, action.payload]
+      // })
+    },
   },
 })
 
