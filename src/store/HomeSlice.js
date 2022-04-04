@@ -10,11 +10,11 @@ export const productSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       console.log('action', action)
-      // products.push(action.payload)
-      return ({
-        ...state,
-        products: [...state.products, action.payload]
-      })
+      state.products.push(action.payload)
+      // return ({
+      //   ...state,
+      //   products: [...state.products, action.payload]
+      // })
     },
   },
 })
