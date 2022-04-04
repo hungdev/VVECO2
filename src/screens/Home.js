@@ -15,6 +15,10 @@ export default function Home({ navigation }) {
    * <Text>hat</Text>
    */
 
+  const onAddProduct = () => {
+    dispatch({ type: "ADD_PRODUCT", data: "tshirt" })
+  }
+
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -30,6 +34,12 @@ export default function Home({ navigation }) {
       />
       <TouchableOpacity onPress={() => dispatch({ type: "SEND_FROM_FATHER", data: "socola" })}>
         <Text>I'm pressable!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={onAddProduct}>
+        <Text>Add product</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => dispatch({ type: "ADD_USER", data: "hello" })}>
+        <Text>Add User</Text>
       </TouchableOpacity>
     </View>
   )

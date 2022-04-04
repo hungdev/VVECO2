@@ -1,17 +1,17 @@
 const initialState = {
-  gifts: [],
-  products: []
+  users: [],
+  user: null
 };
 
 export default function itemReducer(state = initialState, action) {
   switch (action.type) {
-    case "SEND_FROM_FATHER":
+    case "ADD_USER":
       return {
-        gifts: [...state.gifts, action.data]
+        user: action.data
       };
-    case "ADD_PRODUCT":
+    case "ADD_USERS":
       return {
-        products: [...state.products, action.data]
+        users: [...state.users, action.data]
       };
     default:
       return state;
