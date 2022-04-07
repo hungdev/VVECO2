@@ -1,38 +1,32 @@
-import { Button, View, Text, Pressable, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from "react-redux";
-import { addProduct } from '../store/HomeSlice'
+import { View, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import axios from 'axios';
+// import Reactotron from 'reactotron-react-native'
 
-export default function Home({ navigation }) {
-  const dispatch = useDispatch();
-  const list = useSelector(store => store.product.products)
-  const [inputVl, setInputVl] = useState()
+export default function Home() {
 
-  const onAddProduct = () => {
-    dispatch(addProduct(inputVl))
+  const getData = () => {
+    axios.get('https://jsonplaceholder.typicode.com/todos/1')
+      .then(function (response) {
+        // handle success
+        console.tron.log('this is response', response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
   }
 
-  const onChangeText = (txt) => setInputVl(txt)
-
+  console.tron.log('hello rendering world')
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>NewFeed Screen</Text>
-      {list?.map((e, i) =>
-        <View key={i} style={{ flexDirection: 'row' }}>
-          <Text style={{ marginRight: 10 }}>{e}</Text>
-          <TouchableOpacity>
-            <Text>Remove</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      <TextInput
-        style={{ height: 50, width: '100%', borderWidth: 1 }}
-        onChangeText={onChangeText}
-        value={inputVl}
-      />
-      <TouchableOpacity onPress={onAddProduct}>
-        <Text>Add User</Text>
+    <View>
+      <Text>Home</Text>
+      <TouchableOpacity onPress={getData}>
+        <Text>Get Api</Text>
       </TouchableOpacity>
     </View>
   )
