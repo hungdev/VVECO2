@@ -13,3 +13,16 @@ const instance = axios.create({
 export const getTodo = () => {
   return instance.get('/todos/1')
 }
+
+export const createTodo = (params) => {
+  return instance.post('/posts', params)
+}
+
+export const updateTodo = (id, params) => {
+  return instance.put(`/posts/${id}`, params)
+}
+
+export const deleteTodo = (id) => {
+  return instance.delete(`/posts/${id}`)
+}
+

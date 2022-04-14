@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import axios from 'axios';
 // import Reactotron from 'reactotron-react-native'
-import { getTodo } from '../services/ApiConfig'
+import { getTodo, createTodo, updateTodo, deleteTodo } from '../services/ApiConfig'
 
 export default function Home() {
 
@@ -55,12 +55,44 @@ export default function Home() {
 
   }
 
+  const createPost = async () => {
+    const data = {
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+    }
+
+    const todoRs = await createTodo(data)
+  }
+  const updatePost = async () => {
+    const data = {
+      name: 'foo',
+      body: 'helle',
+      userId: 1,
+    }
+
+    const todoRs = await updateTodo(1, data)
+  }
+  const deletePost = async () => {
+    const todoRs = await deleteTodo(1)
+  }
+
+
 
   return (
     <View>
       <Text>Home</Text>
       <TouchableOpacity onPress={getData}>
         <Text>Get Api</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={createPost}>
+        <Text>Create post</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={updatePost}>
+        <Text>Update post</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={deletePost}>
+        <Text>Delete post</Text>
       </TouchableOpacity>
     </View>
   )
