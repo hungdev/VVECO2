@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
-import { getTodo, updateTodo } from '../services/ApiConfig'
+import { getTodo, updateTodo, getCategory } from '../services/ApiConfig'
 
 const initialState = {
   products: [],
   todo: [],
+  categories: [],
   loading: false
 }
 
@@ -17,6 +18,13 @@ export const updateListTodo = createAsyncThunk('todo/updateListTodoKey', async (
   // thunkAPI.dispatch(...)
   console.tron.log('params', params)
   const list = await updateTodo(params.id, params.data);
+  console.log('list', list);
+  return list;
+});
+export const getCategoryList = createAsyncThunk('todo/updateListTodoKey', async (params, thunkAPI) => {
+  // thunkAPI.dispatch(...)
+  console.tron.log('params', params)
+  const list = await getCategory();
   console.log('list', list);
   return list;
 });
@@ -60,6 +68,11 @@ export const productSlice = createSlice({
     [updateListTodo.fulfilled]: (state, action) => {
       state.loading = false;
       state.todo = action.payload.data;
+    },
+    // get category
+    [getCategoryList.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.categories = action.payload.data.data;
     },
 
 
