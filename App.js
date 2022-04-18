@@ -18,13 +18,15 @@ import {
 } from 'redux-persist'
 
 import HomeSlice from "./src/store/HomeSlice";
+import AuthSlice from "./src/store/AuthSlice";
 
 import Navigation from "./src/navigation";
 
 // import { store } from './src/store/store'
 
 export const allReducers = combineReducers({
-  product: HomeSlice
+  product: HomeSlice,
+  auth: AuthSlice
 });
 
 const persistConfig = {

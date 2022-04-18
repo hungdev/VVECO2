@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const instance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: 'https://forever21.hungvu.net',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'
@@ -26,3 +26,6 @@ export const deleteTodo = (id) => {
   return instance.delete(`/posts/${id}`)
 }
 
+export const login = (params) => {
+  return instance.post('/login', params)
+}

@@ -4,11 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useSelector, useDispatch } from "react-redux";
 
 import NewFeed from '../screens/Home'
 import DetailsScreen from '../screens/Detail'
 import SettingScreen from '../screens/Setting'
 import CommentScreen from '../screens/Comment'
+import LoginScreen from '../screens/Login'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -54,12 +56,20 @@ const MainTab = () => {
 }
 
 function App() {
+  const isSignedIn = useSelector(store => store.auth.token)
+  console.tron.log('isSignedIn', isSignedIn)
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainTab">
-        <Stack.Screen name="MainTab" component={MainTab} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={DetailsScreen} />
-        <Stack.Screen name="Register" component={SettingScreen} />
+        {isSignedIn ?
+          <Stack.Screen name="MainTab" component={MainTab} options={{ headerShown: false }} />
+          : (
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Register" component={SettingScreen} />
+            </>
+          )
+        }
       </Stack.Navigator>
 
     </NavigationContainer>

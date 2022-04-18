@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getTodo, createTodo, updateTodo, deleteTodo } from '../services/ApiConfig'
 
 import { getListTodo, updateListTodo } from '../store/HomeSlice'
+import { clearState } from '../store/AuthSlice'
 
 export default function Home() {
   const listTodo = useSelector(store => store.product.todo)
@@ -42,11 +43,18 @@ export default function Home() {
     const todoRs = await deleteTodo(1)
   }
 
+  const onLogout = async () => {
+    dispatch(clearState())
+  }
+
 
 
   return (
     <View>
       <Text>Home</Text>
+      <TouchableOpacity onPress={onLogout} style={{ marginVertical: 20 }}>
+        <Text>Logout</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={getData}>
         <Text>Get Api</Text>
       </TouchableOpacity>
