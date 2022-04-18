@@ -9,7 +9,7 @@ const initialState = {
 
 export const signInApi = createAsyncThunk('auth/login', async (params, thunkAPI) => {
   // thunkAPI.dispatch(...)
-  const list = await login(params);
+  const list = await login(params, { token: 'token' });
   console.log('list', list);
   return list;
 });
