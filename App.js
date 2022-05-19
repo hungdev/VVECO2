@@ -1,6 +1,8 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MapView, { Marker, ProviderPropType, PROVIDER_GOOGLE } from 'react-native-maps';
+import GeolocationCommunity from '@react-native-community/geolocation';
+import { hasLocationPermission } from './location-permission';
 
 export default function App() {
   const mapRef = React.useRef(null);
@@ -11,6 +13,54 @@ export default function App() {
     longitudeDelta: 0.0421,
   };
   const [markerPosition, setMarkerPosition] = useState(position);
+
+
+  const getLocation = async () => {
+    const hasPermission = await hasLocationPermission();
+    console.tron.log('hasPermission', hasPermission);
+    if (!hasPermission) {
+      return;
+    }
+
+    GeolocationCommunity.getCurrentPosition(info => {
+      console.tron.log('info', info);
+      // animateToRegionMap({
+      //   latitude: info?.coords?.latitude,
+      //   longitude: info?.coords?.longitude,
+      // });
+
+      mapRef.current.animateToRegion(
+        {
+          // latitudeDelta: 0.005,
+          // longitudeDelta: 0.001,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+          latitude: info?.coords?.latitude,
+          longitude: info?.coords?.longitude,
+        },
+        350
+      );
+      setMarkerPosition({
+        // latitudeDelta: 0.005,
+        // longitudeDelta: 0.001,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+        latitude: info?.coords?.latitude,
+        longitude: info?.coords?.longitude,
+      });
+      // setMarkers([{
+      //   title: 'Ceeee',
+      //   latitude: info?.coords?.latitude,
+      //   longitude: info?.coords?.longitude,
+      // }])
+    }
+    );
+  };
+
+  useEffect(() => {
+    getLocation();
+  });
+
 
   const onMoveMarker = () => {
     mapRef.current.animateToRegion(
